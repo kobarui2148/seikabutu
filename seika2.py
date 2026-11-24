@@ -87,6 +87,15 @@ QUIZ = [
 ]
 
 
+def pick_quiz(exclude_question: str = "") -> dict:
+    # 出題する問題を1問選び、選択肢の順番を並べ替えたカードを作る
+    candidates = [q for q in QUIZ if q["question"] != exclude_question]
+    quiz = random.choice(candidates)
+    correct = quiz["choices"][quiz["answer"]]
+    shuffled = random.sample(quiz["choices"], len(quiz["choices"]))
+    return {**quiz, "choices": shuffled, "answer": shuffled.index(correct)}
+
+
 def init_state() -> None:
     defaults = {
         "selected_screen": "メインダッシュボード",
@@ -94,7 +103,7 @@ def init_state() -> None:
         "selected_period": "3ヶ月",
         "selected_tags": [],
         "compare_codes": ["7203", "6758"],
-        "quiz_current_q": random.choice(QUIZ),
+        "quiz_current_q": pick_quiz(),
         "news_page": 0,
         "news_keyword": "",  # ニュース検索用のキーワード状態
     }
@@ -756,8 +765,7 @@ def render_learning_center() -> None:
                     st.info(f"**【解説】**\n{quiz['explain']}")
         with col2:
             if st.button("🔄 別の問題をランダムで出題する", use_container_width=True):
-                remaining_quiz = [q for q in QUIZ if q["question"] != quiz["question"]]
-                st.session_state.quiz_current_q = random.choice(remaining_quiz)
+                st.session_state.quiz_current_q = pick_quiz(quiz["question"])
                 st.rerun()
 
 
