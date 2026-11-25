@@ -483,7 +483,7 @@ def render_dashboard() -> None:
         query = st.text_input(
             "企業名・コード・タグで検索", 
             value=st.session_state.selected_stock,
-            placeholder="例: トヨタ, パナソニック, 6752, #AI"
+            placeholder="例: トヨタ, 6752, #AI"
         )
     with col2:
         period_options = ["1週間", "1ヶ月", "3ヶ月", "半年", "1年", "3年", "5年"]
@@ -520,7 +520,7 @@ def render_dashboard() -> None:
     code = st.session_state.selected_stock
     
     if not code:
-        st.info("👈 上のボックスから検索したい銘柄（例: パナソニック, 6752, トヨタ）を入力して「更新・分析する」を押してください！")
+        st.info("👆 上のボックスから検索したい銘柄（例: トヨタ, 6752）を入力して「更新・分析する」を押してください！")
         return
 
     name = get_stock_name(code)
