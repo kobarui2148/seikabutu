@@ -1,0 +1,5 @@
+[theme]
+base = "dark"                         # Streamlitの暗いテーマを使う
+backgroundColor = "#0f172a"           # 背景：濃い紺（THEMEのbgと同じ）
+secondaryBackgroundColor = "#1e293b"  # 入力欄や枠の背景：紺グレー（THEMEのpanelと同じ）
+textColor = "#ffffff"                 # 文字：白
